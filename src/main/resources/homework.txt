@@ -1,0 +1,15 @@
+Create Movie(id:Integer, name:String, releaseYear:int) entity
+
+Create the following relations:
+
+OneToOne: Rating(id:Integer, rating:int, agency:String) : one movie has a single rating, a rating can refer only to one movie
+
+OneToMany: Review(id:Integer, text:String, reviewer:String) : one movie has multiple review, a review can refer only one movie
+
+ManyToOne: Studio(id:Integer, name:String, address:String) : one movie is produced by one studio, a studio can produce multiple movies
+
+ManyToMany: Actor(id:Integer, name:String, birthYear:int) : one movie has multiple actors in cast, an actor can participate in multiple movies
+
+Pre-populate the database with various data.
+
+Create a single endpoint that returns all movies save
