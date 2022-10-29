@@ -1,5 +1,4 @@
-The Lord of the Rings: The Return of the King | 2003
-Madagascar | 2005
-Transformers: Revenge of the Fallen | 2009
-Snowpiercer | 2013
-The Revenant | 2015
+Movie.name | Movie.releaseYear | Rating.rating | Rating.agency | Review.text - Review.reviewer ; Review.text - Review.reviewer | Studio.name | Studio.address | Actor.name - Actor.birthYear ; Actor.name - Actor.birthYear
+
+The Lord of the Rings: The Return of the King | 2003 | 9.0 | IMDb | Best movie ever!!! - bigman234 ; Very nice. - y3ps!r | New Line Cinema | 4000 Warner Blvd, Burbank, California, United States | actor1 - 1981 ; actor2 - 1939 ; actor3 - 1977
+Transformers: Revenge of the Fallen | 2009 | 57 | Rotten Tomatoes | Worst thing i've watched yet. Shame! - syhalkx ; Not that bad - qwertyuiop | DreamWorks Pictures | 100 Universal City Plaza, Universal City, California, United States | actor4 - 1986 ; actor2 - 1939 ; actor1 - 1981

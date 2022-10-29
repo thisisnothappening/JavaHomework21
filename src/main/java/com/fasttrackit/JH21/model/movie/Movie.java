@@ -18,7 +18,7 @@ import java.util.List;
 @Entity
 public class Movie {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
     private String name;
@@ -31,7 +31,7 @@ public class Movie {
     @ManyToOne(cascade = CascadeType.ALL)
     private Studio studio;
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Actor> actor = new ArrayList<>();
+    private List<Actor> actorList = new ArrayList<>();
 
     public Movie(String name, int releaseYear) {
         this.name = name;

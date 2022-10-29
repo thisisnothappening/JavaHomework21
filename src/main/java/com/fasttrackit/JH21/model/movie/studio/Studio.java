@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Studio {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
     private String name;
