@@ -1,10 +1,7 @@
 package com.fasttrackit.JH21.service;
 
-import com.fasttrackit.JH21.model.movie.Movie;
-import com.fasttrackit.JH21.model.movie.actor.Actor;
-import com.fasttrackit.JH21.model.movie.rating.Rating;
-import com.fasttrackit.JH21.model.movie.review.Review;
-import com.fasttrackit.JH21.model.movie.studio.Studio;
+import com.fasttrackit.JH21.model.*;
+import com.fasttrackit.JH21.repository.*;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +19,9 @@ public class MovieReader {
 
     @Bean
     @SneakyThrows
-    List<Movie> readMovies(MovieRepository movieRepository, StudioRepository studioRepository, ActorRepository actorRepository) {
+    List<Movie> readMovies(MovieRepository movieRepository,
+                           StudioRepository studioRepository,
+                           ActorRepository actorRepository) {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(fileMoviesPath));
         bufferedReader.readLine();
         bufferedReader.readLine();

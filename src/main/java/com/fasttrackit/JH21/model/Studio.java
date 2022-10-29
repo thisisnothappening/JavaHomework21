@@ -1,4 +1,4 @@
-package com.fasttrackit.JH21.model.movie.review;
+package com.fasttrackit.JH21.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,17 +10,17 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Review {
+public class Studio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
-    private String text;
+    private String name;
     @Column
-    private String reviewer;
+    private String address;
 
-    public Review(String text, String reviewer) {
-        this.text = text;
-        this.reviewer = reviewer;
+    public Studio(String name, String address) {
+        this.name = name;
+        this.address = address;
     }
 }

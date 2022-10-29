@@ -1,6 +1,6 @@
 package com.fasttrackit.JH21.controller;
 
-import com.fasttrackit.JH21.model.movie.Movie;
+import com.fasttrackit.JH21.model.Movie;
 import com.fasttrackit.JH21.service.MovieService;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,9 +1,5 @@
-package com.fasttrackit.JH21.model.movie;
+package com.fasttrackit.JH21.model;
 
-import com.fasttrackit.JH21.model.movie.actor.Actor;
-import com.fasttrackit.JH21.model.movie.rating.Rating;
-import com.fasttrackit.JH21.model.movie.review.Review;
-import com.fasttrackit.JH21.model.movie.studio.Studio;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

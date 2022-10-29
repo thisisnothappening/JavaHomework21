@@ -1,4 +1,4 @@
-package com.fasttrackit.JH21.model.movie.studio;
+package com.fasttrackit.JH21.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,17 +10,17 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Studio {
+public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
     private String name;
     @Column
-    private String address;
+    private int birthYear;
 
-    public Studio(String name, String address) {
+    public Actor(String name, int birthYear) {
         this.name = name;
-        this.address = address;
+        this.birthYear = birthYear;
     }
 }

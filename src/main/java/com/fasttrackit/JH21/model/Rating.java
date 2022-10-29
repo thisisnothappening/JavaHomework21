@@ -1,4 +1,4 @@
-package com.fasttrackit.JH21.model.movie.rating;
+package com.fasttrackit.JH21.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

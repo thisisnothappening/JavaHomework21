@@ -1,6 +1,7 @@
 package com.fasttrackit.JH21.service;
 
-import com.fasttrackit.JH21.model.movie.Movie;
+import com.fasttrackit.JH21.model.Movie;
+import com.fasttrackit.JH21.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

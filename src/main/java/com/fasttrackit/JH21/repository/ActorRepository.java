@@ -1,8 +1,10 @@
-package com.fasttrackit.JH21.service;
+package com.fasttrackit.JH21.repository;
 
-import com.fasttrackit.JH21.model.movie.actor.Actor;
+import com.fasttrackit.JH21.model.Actor;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ActorRepository extends JpaRepository<Actor, Integer> {
 
     Actor findByName(String name);
