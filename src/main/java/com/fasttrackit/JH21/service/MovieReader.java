@@ -22,27 +22,53 @@ public class MovieReader {
 
     @Bean
     @SneakyThrows
-    List<Movie> readMovies(MovieRepository movieRepository) {
+    List<Movie> readMovies(MovieRepository movieRepository, StudioRepository studioRepository, ActorRepository actorRepository) {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(fileMoviesPath));
+        bufferedReader.readLine();
         bufferedReader.readLine();
         bufferedReader.readLine();
         String line;
         while ((line = bufferedReader.readLine()) != null) {
             String[] lineElements = line.split(" \\| ");
-            String[] reviewElements = lineElements[4].split(" ; ");
-            String[] actorElements = lineElements[7].split(" ; ");
+            String[] movieNameAndYear = lineElements[0].split(" - ");
+            String[] ratingFields = lineElements[1].split(" - ");
+            String[] reviewElements = lineElements[2].split(" ; ");
+            String[] studioFields = lineElements[3].split(" - ");
+            String[] actorElements = lineElements[4].split(" ; ");
 
-            Movie movie = new Movie(lineElements[0], Integer.parseInt(lineElements[1]), new Rating(Double.parseDouble(lineElements[2]), lineElements[3]), new Studio(lineElements[5], lineElements[6]));
+            Rating rating;
+            if (ratingFields.length == 2) {
+                rating = new Rating(Double.parseDouble(ratingFields[0]), ratingFields[1]);
+            } else {
+                rating = null;
+            }
+
+            Studio studio;
+            if (studioRepository.existsByName(studioFields[0])) {
+                studio = studioRepository.findByName(studioFields[0]);
+            } else {
+                studio = new Studio(studioFields[0], studioFields[1]);
+                studioRepository.save(studio);
+            }
+
+            Movie movie = new Movie(movieNameAndYear[0], Integer.parseInt(movieNameAndYear[1]), rating, studio);
             movieRepository.save(movie);
 
             for (String reviewElement : reviewElements) {
                 String[] reviewFields = reviewElement.split(" - ");
-                Review review = new Review(reviewFields[0], reviewFields[1]);
-                movie.getReviewList().add(review);
+                if (reviewFields.length == 2) {
+                    Review review = new Review(reviewFields[0], reviewFields[1]);
+                    movie.getReviewList().add(review);
+                }
             }
             for (String actorElement : actorElements) {
                 String[] actorFields = actorElement.split(" - ");
-                Actor actor = new Actor(actorFields[0], Integer.parseInt(actorFields[1]));
+                Actor actor;
+                if (actorRepository.existsByName(actorFields[0])) {
+                    actor = actorRepository.findByName(actorFields[0]);
+                } else {
+                    actor = new Actor(actorFields[0], Integer.parseInt(actorFields[1]));
+                }
                 movie.getActorList().add(actor);
             }
             movieRepository.save(movie);
@@ -51,5 +77,3 @@ public class MovieReader {
         return movieRepository.findAll();
     }
 }
-// - a studio or actor can belong to multiple movies
-// - what if there is no review or rating? should not throw exception, instead rating should be null, and reviewList should be empty

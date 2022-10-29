@@ -28,21 +28,10 @@ public class Movie {
     private Rating rating;
     @OneToMany(cascade = CascadeType.ALL)
     private final List<Review> reviewList = new ArrayList<>();
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Studio studio;
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Actor> actorList = new ArrayList<>();
-
-    public Movie(String name, int releaseYear) {
-        this.name = name;
-        this.releaseYear = releaseYear;
-    }
-
-    public Movie(String name, int releaseYear, Rating rating) {
-        this.name = name;
-        this.releaseYear = releaseYear;
-        this.rating = rating;
-    }
 
     public Movie(String name, int releaseYear, Rating rating, Studio studio) {
         this.name = name;
