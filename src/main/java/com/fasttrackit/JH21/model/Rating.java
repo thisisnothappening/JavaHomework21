@@ -15,11 +15,11 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
-    private double rating;
+    private Double rating;
     @Column
     private String agency;
 
-    public Rating(double rating, String agency) {
+    public Rating(Double rating, String agency) {
         this.rating = rating;
         this.agency = agency;
     }

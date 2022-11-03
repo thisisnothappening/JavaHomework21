@@ -17,9 +17,9 @@ public class Actor {
     @Column
     private String name;
     @Column
-    private int birthYear;
+    private Integer birthYear;
 
-    public Actor(String name, int birthYear) {
+    public Actor(String name, Integer birthYear) {
         this.name = name;
         this.birthYear = birthYear;
     }

@@ -19,17 +19,17 @@ public class Movie {
     @Column
     private String name;
     @Column
-    private int releaseYear;
+    private Integer releaseYear;
     @OneToOne(cascade = CascadeType.ALL)
     private Rating rating;
     @OneToMany(cascade = CascadeType.ALL)
     private final List<Review> reviewList = new ArrayList<>();
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Studio studio;
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Actor> actorList = new ArrayList<>();
+    private final List<Actor> actorList = new ArrayList<>();
 
-    public Movie(String name, int releaseYear, Rating rating, Studio studio) {
+    public Movie(String name, Integer releaseYear, Rating rating, Studio studio) {
         this.name = name;
         this.releaseYear = releaseYear;
         this.rating = rating;

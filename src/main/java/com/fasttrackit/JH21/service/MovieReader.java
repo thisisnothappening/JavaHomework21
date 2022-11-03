@@ -17,7 +17,7 @@ public class MovieReader {
     @Value("${file.movies}")
     private String fileMoviesPath;
 
-    @Bean
+    // @Bean
     @SneakyThrows
     List<Movie> readMovies(MovieRepository movieRepository,
                            StudioRepository studioRepository,
