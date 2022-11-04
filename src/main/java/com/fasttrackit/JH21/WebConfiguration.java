@@ -1,4 +1,4 @@
-package com.fasttrackit.JH21.service;
+package com.fasttrackit.JH21;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

@@ -1,4 +1,4 @@
-package com.fasttrackit.JH21.service;
+package com.fasttrackit.JH21;
 
 import com.fasttrackit.JH21.model.*;
 import com.fasttrackit.JH21.repository.*;
