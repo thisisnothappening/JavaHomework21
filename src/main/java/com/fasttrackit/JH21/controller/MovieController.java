@@ -24,7 +24,7 @@ public class MovieController {
     Movie getMovie(@PathVariable Integer id) {
         return movieService.getMovie(id);
     }
-
+/*
     @PostMapping
     Movie postMovie(@RequestBody Movie movie) {
         return movieService.postMovie(movie);
@@ -38,5 +38,5 @@ public class MovieController {
     @DeleteMapping("{id}")
     void deleteMovie(@PathVariable Integer id) {
         movieService.deleteMovie(id);
-    }
+    }*/
 }

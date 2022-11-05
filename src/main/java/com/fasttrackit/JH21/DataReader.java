@@ -1,4 +1,4 @@
-package com.fasttrackit.JH21.service;
+package com.fasttrackit.JH21;
 
 import com.fasttrackit.JH21.model.*;
 import com.fasttrackit.JH21.repository.*;
@@ -12,16 +12,17 @@ import java.io.FileReader;
 import java.util.List;
 
 @Configuration
-public class MovieReader {
+public class DataReader {
 
     @Value("${file.movies}")
     private String fileMoviesPath;
 
-    // @Bean
+    @Bean
     @SneakyThrows
-    List<Movie> readMovies(MovieRepository movieRepository,
-                           StudioRepository studioRepository,
-                           ActorRepository actorRepository) {
+    List<DataUmbrella> readData(DataUmbrellaRepository dataUmbrellaRepository,
+                                MovieRepository movieRepository,
+                                StudioRepository studioRepository,
+                                ActorRepository actorRepository) {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(fileMoviesPath));
         bufferedReader.readLine();
         bufferedReader.readLine();
@@ -34,6 +35,8 @@ public class MovieReader {
             String[] reviewElements = lineElements[2].split(" ; ");
             String[] studioFields = lineElements[3].split(" - ");
             String[] actorElements = lineElements[4].split(" ; ");
+
+            Movie movie = new Movie(movieNameAndYear[0], Integer.parseInt(movieNameAndYear[1]));
 
             Rating rating;
             if (ratingFields.length == 2) {
@@ -50,14 +53,13 @@ public class MovieReader {
                 studioRepository.save(studio);
             }
 
-            Movie movie = new Movie(movieNameAndYear[0], Integer.parseInt(movieNameAndYear[1]), rating, studio);
-            movieRepository.save(movie);
+            DataUmbrella dataUmbrella = new DataUmbrella(movie, rating, studio);
 
             for (String reviewElement : reviewElements) {
                 String[] reviewFields = reviewElement.split(" - ");
                 if (reviewFields.length == 2) {
                     Review review = new Review(reviewFields[0], reviewFields[1]);
-                    movie.getReviewList().add(review);
+                    dataUmbrella.getReviewList().add(review);
                 }
             }
             for (String actorElement : actorElements) {
@@ -67,12 +69,13 @@ public class MovieReader {
                     actor = actorRepository.findByName(actorFields[0]);
                 } else {
                     actor = new Actor(actorFields[0], Integer.parseInt(actorFields[1]));
+                    actorRepository.save(actor);
                 }
-                movie.getActorList().add(actor);
+                dataUmbrella.getActorList().add(actor);
             }
-            movieRepository.save(movie);
+            dataUmbrellaRepository.save(dataUmbrella);
         }
         bufferedReader.close();
-        return movieRepository.findAll();
+        return dataUmbrellaRepository.findAll();
     }
 }

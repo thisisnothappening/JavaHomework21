@@ -19,13 +19,13 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
-    public Movie postMovie(Movie movie) {
-        return movieRepository.save(movie);
-    }
-
     public Movie getMovie(Integer id) {
         return movieRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Movie not found!"));
+    }
+/*
+    public Movie postMovie(Movie movie) {
+        return movieRepository.save(movie);
     }
 
     public Movie updateMovie(Integer id, Movie movie) {
@@ -41,4 +41,5 @@ public class MovieService {
         movieRepository.delete(movieRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Movie not found!")));
     } // this one throws SQLIntegrityConstraintViolationException
+    */
 }
