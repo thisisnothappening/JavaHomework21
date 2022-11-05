@@ -15,6 +15,14 @@ public class StudioService {
         this.studioRepository = studioRepository;
     }
 
+    public boolean existsByName(String name) {
+        return studioRepository.existsByName(name);
+    }
+
+    public Studio findByName(String name) {
+        return studioRepository.findByName(name);
+    }
+
     public List<Studio> getStudios() {
         return studioRepository.findAll();
     }
@@ -22,5 +30,9 @@ public class StudioService {
     public Studio getStudio(Integer id) {
         return studioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Studio not found!"));
+    }
+
+    public Studio save(Studio studio) {
+        return studioRepository.save(studio);
     }
 }

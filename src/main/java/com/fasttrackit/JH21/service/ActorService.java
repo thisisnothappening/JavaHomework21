@@ -15,6 +15,14 @@ public class ActorService {
         this.actorRepository = actorRepository;
     }
 
+    public boolean existsByName(String name) {
+        return actorRepository.existsByName(name);
+    }
+
+    public Actor findByName(String name) {
+        return actorRepository.findByName(name);
+    }
+
     public List<Actor> getActors() {
         return actorRepository.findAll();
     }
@@ -22,5 +30,9 @@ public class ActorService {
     public Actor getActor(Integer id) {
         return actorRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Actor not found!"));
+    }
+
+    public Actor save(Actor actor) {
+        return actorRepository.save(actor);
     }
 }

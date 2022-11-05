@@ -1,18 +1,28 @@
 package com.fasttrackit.JH21.service;
 
 import com.fasttrackit.JH21.exceptions.ResourceNotFoundException;
+import com.fasttrackit.JH21.model.Actor;
 import com.fasttrackit.JH21.model.Movie;
+import com.fasttrackit.JH21.model.Rating;
+import com.fasttrackit.JH21.model.Studio;
 import com.fasttrackit.JH21.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class MovieService {
     private final MovieRepository movieRepository;
+    private final RatingService ratingService;
+    private final StudioService studioService;
+    private final ActorService actorService;
 
-    public MovieService(MovieRepository movieRepository) {
+    public MovieService(MovieRepository movieRepository, RatingService ratingService, StudioService studioService, ActorService actorService) {
         this.movieRepository = movieRepository;
+        this.ratingService = ratingService;
+        this.studioService = studioService;
+        this.actorService = actorService;
     }
 
     public List<Movie> getMovies() {
@@ -20,6 +30,28 @@ public class MovieService {
     }
 
     public Movie postMovie(Movie movie) {
+        if (ratingService.existsByRatingAndAgency(movie.getRating().getRating(), movie.getRating().getAgency())) {
+            movie.setRating(ratingService.findByRatingAndAgency(movie.getRating().getRating(), movie.getRating().getAgency()));
+        } else {
+            movie.setRating(ratingService.save(new Rating(movie.getRating().getRating(), movie.getRating().getAgency())));
+        }
+
+        if (studioService.existsByName(movie.getStudio().getName())) {
+            movie.setStudio(studioService.findByName(movie.getStudio().getName()));
+        } else {
+            movie.setStudio(studioService.save(new Studio(movie.getStudio().getName(), movie.getStudio().getAddress())));
+        }
+
+        List<Actor> tempActorList = new ArrayList<>();
+        for (Actor actor : movie.getActorList()) {
+            if (actorService.existsByName(actor.getName())) {
+                tempActorList.add(actorService.findByName(actor.getName()));
+            } else {
+                tempActorList.add(new Actor(actor.getName(), actor.getBirthYear()));
+            }
+        }
+        movie.getActorList().removeAll(movie.getActorList());
+        movie.getActorList().addAll(tempActorList);
         return movieRepository.save(movie);
     }
 

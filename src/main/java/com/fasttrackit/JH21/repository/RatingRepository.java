@@ -7,9 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RatingRepository extends JpaRepository<Rating, Integer> {
 
-    Rating findByRating(String rating);
-    Rating findByAgency(String agency);
+    boolean existsByRatingAndAgency(Double rating, String agency);
 
-    boolean existsByRating(String rating);
-    boolean existsByAgency(String agency);
+    Rating findByRatingAndAgency(Double rating, String agency);
 }

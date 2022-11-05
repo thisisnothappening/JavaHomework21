@@ -2,10 +2,7 @@ package com.fasttrackit.JH21.controller;
 
 import com.fasttrackit.JH21.model.Rating;
 import com.fasttrackit.JH21.service.RatingService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 

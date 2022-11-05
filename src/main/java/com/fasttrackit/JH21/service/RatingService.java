@@ -15,6 +15,14 @@ public class RatingService {
         this.ratingRepository = ratingRepository;
     }
 
+    public boolean existsByRatingAndAgency(Double rating, String agency) {
+        return ratingRepository.existsByRatingAndAgency(rating, agency);
+    }
+
+    public Rating findByRatingAndAgency(Double rating, String agency) {
+        return ratingRepository.findByRatingAndAgency(rating, agency);
+    }
+
     public List<Rating> getRatings() {
         return ratingRepository.findAll();
     }
@@ -22,5 +30,9 @@ public class RatingService {
     public Rating getRating(Integer id) {
         return ratingRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Rating not found!"));
+    }
+
+    public Rating save(Rating rating) {
+        return ratingRepository.save(rating);
     }
 }
