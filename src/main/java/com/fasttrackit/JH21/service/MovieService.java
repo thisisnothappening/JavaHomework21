@@ -29,6 +29,11 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
+    public Movie getMovie(Integer id) {
+        return movieRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Movie not found!"));
+    }
+
     public Movie postMovie(Movie movie) {
         if (ratingService.existsByRatingAndAgency(movie.getRating().getRating(), movie.getRating().getAgency())) {
             movie.setRating(ratingService.findByRatingAndAgency(movie.getRating().getRating(), movie.getRating().getAgency()));
@@ -55,11 +60,6 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
-    public Movie getMovie(Integer id) {
-        return movieRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Movie not found!"));
-    }
-
     public Movie updateMovie(Integer id, Movie movie) {
         Movie existingMovie = movieRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Movie not found!"));
@@ -72,5 +72,5 @@ public class MovieService {
     public void deleteMovie(Integer id) {
         movieRepository.delete(movieRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Movie not found!")));
-    } // this one throws SQLIntegrityConstraintViolationException
+    } // after all movies are deleted, their actors and studios still exists. Is this good?
 }

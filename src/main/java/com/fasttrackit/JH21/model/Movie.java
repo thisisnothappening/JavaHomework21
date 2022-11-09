@@ -24,9 +24,9 @@ public class Movie {
     private Rating rating;
     @OneToMany(cascade = CascadeType.ALL)
     private final List<Review> reviewList = new ArrayList<>();
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Studio studio;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private final List<Actor> actorList = new ArrayList<>();
 
     public Movie(String name, Integer releaseYear, Rating rating, Studio studio) {
