@@ -55,7 +55,7 @@ public class MovieService {
                 tempActorList.add(new Actor(actor.getName(), actor.getBirthYear()));
             }
         }
-        movie.getActorList().removeAll(movie.getActorList());
+        movie.getActorList().clear();
         movie.getActorList().addAll(tempActorList);
         return movieRepository.save(movie);
     }
